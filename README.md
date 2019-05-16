@@ -4,9 +4,9 @@ Most modern Cloud Services support auto-scaling but these services are slow to s
 
 ## The Scenario
 
-In the era of serverless computing, scaling up and down of cloud services/resources is not something we take mmuch time thinking about. It is assumed that the cloud provider has pre-provisioned extra resources to meet the demands such that any sudden scaling up of resources will happen in a few seconds. That is the price we pay for serverless compute (by-the-second).
+In the era of serverless computing, scaling up and down of cloud services/resources is not something we take much time thinking about. It is assumed that the cloud provider has pre-provisioned extra resources to meet the demands such that any sudden scaling up of resources will happen in a few seconds. That is the price we pay for serverless compute (by-the-second).
 
-However for other traditional cloud services such as VMs, Web Apps, Kubernetes, HPC, Hadoop etc., essentially all the services that charge you by the VM and therefore require spinning up new VMs to meet your application demads, the time taken to scale up can be in the order of a few minutes if not more. This is a problem for applications that are trying to ramp up at the star of a business day or meet sudden demands in traffic based on seasonal or other factors.
+However for other traditional cloud services such as VMs, Web Apps, Kubernetes, HPC, Hadoop etc., essentially all the services that charge you by the VM and therefore require spinning up new VMs to meet your application demands, the time taken to scale up can be in the order of a few minutes if not more. This is a problem for applications that are trying to ramp up at the start of a business day or to meet sudden demands in traffic based on seasonal or other factors.
 
 ### Traditional Scaling Rules 
 
@@ -16,6 +16,7 @@ Most cloud resources can be setup with scaling rules. These rules can react to i
 When Average CPU over 10 minutes > 70%, scale UP by 1 instance
 When Average CPU over 10 minutes < 30%, scale DOWN by 1 instance 
 ```
+
 The problem with this approach is that each reaction to the increase in CPU takes a few minutes before the additional instance is up and running. During this time the system is likely under some pressure. When the additional instance is added to the pool of servers, the systm may stabalize temperorily before it comes under some additional load. Once again the scaling rules will result in an additional instance being spun up, which make take a few more minutes and again causing the system to be uner some pressure. This cycle continues each tme the system is scaled up.
 
 ### The alternative approach
