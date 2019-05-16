@@ -13,8 +13,8 @@ However for other traditional cloud services such as VMs, Web Apps, Kubernetes, 
 Most cloud resources can be setup with scaling rules. These rules can react to increases in CPU, Memory, Disk I/O or even the length of a worker queue. When the increase is observed over a period of a few minutes, certain actions can be taken. The typical scaling rule may be something like: 
 
 ```
-When Average CPU over 10 minutes > 70%, scale **up** by 1 instance
-When Average CPU over 10 minutes < 30%, scale **down** by 1 instance 
+When Average CPU over 10 minutes > 70%, scale UP by 1 instance
+When Average CPU over 10 minutes < 30%, scale DOWN by 1 instance 
 ```
 The problem with this approach is that each reaction to the increase in CPU takes a few minutes before the additional instance is up and running. During this time the system is likely under some pressure. When the additional instance is added to the pool of servers, the systm may stabalize temperorily before it comes under some additional load. Once again the scaling rules will result in an additional instance being spun up, which make take a few more minutes and again causing the system to be uner some pressure. This cycle continues each tme the system is scaled up.
 
