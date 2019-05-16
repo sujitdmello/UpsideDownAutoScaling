@@ -25,8 +25,8 @@ The scaling rules can be made a bit more aggressive such that when the CPU incre
 So the rule may be something like
 
 ```
-When Average CPU over 5 minutes > 40%, scale **up** by **10** instances
-When Average CPU over 30 minutes < 30%, scale **down** by **1** instance
+When Average CPU over 5 minutes > 40%, scale UP by 10 instances
+When Average CPU over 30 minutes < 30%, scale DOWN by 1 instance
 
 ```
 
