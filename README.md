@@ -43,7 +43,7 @@ What does this do? Let's disect it:
 There is a slightly extra cost overhead compare to the traditional scaling rules but this is minimal compared to the benefit to the application to be able to meet the user demaands more consistently.
 
 ```
-It should be noted that although CPU was used as a trigger just as an example.
+It should be noted that CPU was used as a trigger just as an example.
 You can use Memory and Queue length as well and it works just as well. 
 If you have more of a background processing application you may want to look at these other metrics. 
 ```
