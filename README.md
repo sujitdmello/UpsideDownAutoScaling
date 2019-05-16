@@ -31,7 +31,20 @@ When Average CPU over 30 minutes < 30%, scale DOWN by 1 instance
 
 ```
 
-What does this do? Well it results in a very aggressive scale up and a conservative scale down. The advantage of this approach is that the overhead of scaling up the VMs is incurred all at one time. So within a few minutes you have more capacity than you may ever need. On the surface this may appear to be a waste of resources and money but this is not a bad thing as it has given the business more than enough to account for any load over the next several minutes. And in case the system does not require all that capacity, well in about 30 minutes it will start dropping instances one at a time. This will continue until the system reaches a level of instances that is a appropriate for the load. So instead of scaling **up** one at a time until we get to a steady state, we scale **down** one at a time. Hence the name :)  
+What does this do? Let's disect it:
+* First off it results in a very aggressive scale up and a conservative scale down. 
+* Notice how the scale up threshold is pretty low now and the observation time is also down to 5 minutes, to enable it to react a bit quicker.
+* On the other hand the scale down time is over 30 minutes which gives is more time to tear down these 'expensive' resources. Expensive in the sense that they take a long time to start up so we want to be sure before taking them down.
+* The advantage of this approach is that the overhead of scaling up the VMs is incurred all at one time. So within a few minutes you have more capacity than you may ever need. 
+* On the surface this may appear to be a waste of resources and money but this is not a bad thing as it has given the business more than enough to account for any load over the next several minutes. 
+* And in case the system does not require all that capacity, well in about 30 minutes it will start dropping instances one at a time. This will continue until the system reaches a level of instances that is a appropriate for the load. 
+* So instead of scaling **up** one at a time until we get to a steady state, we scale **down** one at a time. Hence the name :)  
+
+There is a slightly extra cost overhead compare to the traditional scaling rules but this is minimal compared to the benefit to the application to be able to meet the user demaands more consistently.
+
+```
+It should be noted that lthough CPU was used as a trigger in this example, it has been tested with Memory and Queue length as well and it works just as well. If you have more of a background processing application you may want to look at these other metrics. 
+```
 
 ## Acknowledgments
 
