@@ -48,6 +48,12 @@ You can use Memory and Queue length as well and it works just as well.
 If you have more of a background processing application you may want to look at these other metrics. 
 ```
 
+While these rules can be applied to most cloud providers, as far as Azure is considered, these are the services that would support them (as of May 2019):
+* Cloud Services
+* App Services
+* Virtual Machines Scale Sets
+* Service Fabric
+ 
 ## Acknowledgments
 
 * Thanks to [David Crawford] (https://github.com/dc995) for giving me the idea initially when discussing this internally at Microsoft

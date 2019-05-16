@@ -1,0 +1,59 @@
+{
+    "type": "Microsoft.Insights/autoscalesettings",
+    "name": "[parameters('hostingPlanName')]",
+    "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+    ],
+    "apiVersion": "2014-04-01",
+    "location": "[parameters('location')]",
+    "properties": {
+        "profiles": [
+            {
+                "name": "DefaultAutoscaleProfile",
+                "capacity": {
+                    "minimum": "1",
+                    "maximum": "10",
+                    "default": "1"
+                },
+                "rules": [
+                    {
+                        "metricTrigger": {
+                            "metricName": "CpuPercentage",
+                            "metricResourceUri": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+                            "timeGrain": "PT5M",
+                            "statistic": "Average",
+                            "timeWindow": "PT5M",
+                            "timeAggregation": "Average",
+                            "operator": "GreaterThan",
+                            "threshold": "40"
+                        },
+                        "scaleAction": {
+                            "direction": "Increase",
+                            "type": "ChangeCount",
+                            "value": "10",
+                            "cooldown": "PT10M"
+                        }
+                    },
+                    {
+                        "metricTrigger": {
+                            "metricName": "CpuPercentage",
+                            "metricResourceUri": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+                            "timeGrain": "PT30M",
+                            "statistic": "Average",
+                            "timeWindow": "PT30M",
+                            "timeAggregation": "Average",
+                            "operator": "LessThan",
+                            "threshold": "30"
+                        },
+                        "scaleAction": {
+                            "direction": "Decrease",
+                            "type": "ChangeCount",
+                            "value": "1",
+                            "cooldown": "PT10M"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
