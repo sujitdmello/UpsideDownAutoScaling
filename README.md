@@ -31,7 +31,7 @@ When Average CPU over 30 minutes < 30%, scale DOWN by 1 instance
 
 ```
 
-What does this do? Well it results in a very aggressive scale up and a conservative scale down. The advantage of this approach is that the overhead of scaling up the VMs is incurred all at one time. So within a few minutes you have more capacity than you may ever need. On the surface this may appear to be a waste of resources and money but this is not a bad thing as it has given the business more than enough to account for any load over the next several minutes. And in case the system does not require all that capacity, well in about 30 minutes it will start dropping instances one at a time. This will continue until the system reaches a level of instances that is a appropriate for the load. So in stead of scaling **up** one at a time until we get to a steady state, we scale **down** one at a time.  
+What does this do? Well it results in a very aggressive scale up and a conservative scale down. The advantage of this approach is that the overhead of scaling up the VMs is incurred all at one time. So within a few minutes you have more capacity than you may ever need. On the surface this may appear to be a waste of resources and money but this is not a bad thing as it has given the business more than enough to account for any load over the next several minutes. And in case the system does not require all that capacity, well in about 30 minutes it will start dropping instances one at a time. This will continue until the system reaches a level of instances that is a appropriate for the load. So instead of scaling **up** one at a time until we get to a steady state, we scale **down** one at a time. Hence the name :)  
 
 ## Acknowledgments
 
