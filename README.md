@@ -12,7 +12,7 @@ However for other traditional cloud services such as VMs, Web Apps, Kubernetes, 
 
 Most cloud resources can be setup with scaling rules. These rules can react to increases in CPU, Memory, Disk I/O or even the length of a worker queue. When the increase is observed over a period of a few minutes, certain actions can be taken. The typical scaling rule may be something like: 
 
-```
+```rule
 When Average CPU over 10 minutes > 70%, scale UP by 1 instance
 When Average CPU over 10 minutes < 30%, scale DOWN by 1 instance 
 ```
@@ -25,14 +25,15 @@ The scaling rules can be made a bit more aggressive such that when the CPU incre
 
 So the rule may be something like
 
-```
+```rule
 When Average CPU over 5 minutes > 40%, scale UP by 10 instances
 When Average CPU over 30 minutes < 30%, scale DOWN by 1 instance
 
 ```
 
 What does this do? Let's disect it:
-* First off it results in a very aggressive scale up and a conservative scale down. 
+
+* First off it results in a very aggressive scale up and a conservative scale down.
 * Notice how the scale up threshold is pretty low now and the observation time is also down to 5 minutes, to enable it to react a bit quicker.
 * On the other hand the scale down time is over 30 minutes which gives is more time to tear down these 'expensive' resources. Expensive in the sense that they take a long time to start up so we want to be sure before taking them down.
 * The advantage of this approach is that the overhead of scaling up the VMs is incurred all at one time. So within a few minutes you have more capacity than you may ever need. 
@@ -42,18 +43,17 @@ What does this do? Let's disect it:
 
 There is a slightly extra cost overhead compare to the traditional scaling rules but this is minimal compared to the benefit to the application to be able to meet the user demaands more consistently.
 
-```
-It should be noted that CPU was used as a trigger just as an example.
-You can use Memory and Queue length as well and it works just as well. 
-If you have more of a background processing application you may want to look at these other metrics. 
-```
+*It should be noted that CPU was used as a trigger just as an example. You can use Memory and Queue length as well and it works just as well. If you have more of a background processing application you may want to look at these other metrics.*
 
 While these rules can be applied to most cloud providers, as far as Azure is considered, these are the services that would support them (as of May 2019):
+
 * Cloud Services
 * App Services
 * Virtual Machines Scale Sets
 * Service Fabric
- 
+
+A sample of the rules definition for Azure resources can be found here: <https://github.com/sujitdmello/UpsideDownAutoScaling/blob/master/scalingrules.json>
+
 ## Acknowledgments
 
-* Thanks to [David Crawford] (https://github.com/dc995) for giving me the idea initially when discussing this internally at Microsoft
+* Thanks to [David Crawford] (<https://github.com/dc995)> for giving me the idea initially when discussing this internally at Microsoft
